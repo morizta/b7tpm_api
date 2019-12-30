@@ -13,7 +13,7 @@ $conn=getConnection();
         // echo $sql; die();
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
-            $data=array();
+            // $data=array();
             $file_names = "";
             
             while($row = $result->fetch_assoc()) {
@@ -38,10 +38,22 @@ $conn=getConnection();
                 
                 $file_names = exportPDF($html_template, 'tpmwhite', null);
             }
-            sendResponse(200, $file_names ,'List TPM Red Tag');
+            
+            if ($file_names != "") {
+                $query = "UPDATE tpm_whitetag set Status = 'Open' where id = ".$data->id."";
+                $res = $conn->query($sql);
+                if ($res) {
+                    sendResponse(200, $file_names ,'Sukses Export Data');
+                } else {
+                    sendResponse(404, [] ,'Export Data Gagal');
+                };
+            }else{
+                sendResponse(404, [] ,'Export Data Gagal');                
+            }
+
             // echo var_dump($data);
         } else {
-            // sendResponse(404,[],'Not Found!');
+            sendResponse(404,[],'Not Found!');
             // echo "not found";
         }
         $conn->close();

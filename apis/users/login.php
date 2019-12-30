@@ -13,8 +13,11 @@ if(!$user->username){
         sendResponse(500,$conn,'Server Connection Error !');
     }else{
         $password=doEncrypt($user->password);
-        $sql = "SELECT id, username, email FROM user WHERE username='";
-        $sql.=$user->username."' AND password = '".$password."'";
+        $sql = "select u.id, u.username, u.fullname, u.email, u.nik, g.Id 'groupid', g.groupname from user u ";
+        $sql.= "join groups g on u.GroupId = g.Id where u.UserName ='".$user->username."'";
+        $sql.= "and password = '".$password."'";
+
+        // var_dump($sql); die;
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             $users=array();
@@ -23,6 +26,10 @@ if(!$user->username){
                     "id" =>  $row["id"],
                     "userename" => $row["username"],
                     "email" => $row["email"],
+                    "fullname" => $row["fullname"],
+                    "nik" => $row["nik"],
+                    "groupid" => $row["groupid"],
+                    "groupname" => $row["groupname"],
                 );
                 array_push($users,$user);
             }

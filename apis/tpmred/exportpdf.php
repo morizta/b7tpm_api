@@ -13,7 +13,7 @@ $conn=getConnection();
         // echo $sql; die();
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
-            $data=array();
+            // $data=array();
             $file_names = "";
             
             while($row = $result->fetch_assoc()) {
@@ -40,64 +40,23 @@ $conn=getConnection();
                 
                 $file_names = exportPDF($html_template, 'tpmred', null);
             }
-            sendResponse(200, $file_names ,'List TPM Red Tag');
+
+            if ($file_names != "") {
+                $query = "UPDATE tpm_redtag set Status = 'Open' where id =".$data->id."";
+                $res = $conn->query($sql);
+                if ($res) {
+                    sendResponse(200, $file_names ,'Sukses Export Data');
+                } else {
+                    sendResponse(404, [] ,'Export Data Gagal');
+                };
+            }else{
+                sendResponse(404, [] ,'Export Data Gagal');                
+            }
+
             // echo var_dump($data);
         } else {
-            // sendResponse(404,[],'Not Found!');
+            sendResponse(404,[],'Not Found!');
             // echo "not found";
         }
         $conn->close();
     }
-
-
-// $data = json_decode(file_get_contents("php://input"));
-// // echo var_dump($data);
-// if(!$data->id){
-//     sendResponse(400, [] , 'Id is Required !');  
-// }else{
-//     $conn=getConnection();
-//     if($conn==null){
-//         sendResponse(500,$conn,'Server Connection Error !');
-//     }else{
-//         $sql = "SELECT * FROM tpm_redtag where id ='".$data->id."'";
-//         $result = $conn->query($sql);
-//         if ($result->num_rows > 0) {
-//             $data=array();
-//             while($row = $result->fetch_assoc()) {
-
-//                 $tglPemasangan = "";
-//                 if(strtotime($row['TanggalPemasangan']) > 0){
-//                    $tglPemasangan = $row["TanggalPemasangan"];
-//                 }
-
-//                 $dueDate = "";
-//                 if(strtotime($row['DueDate']) > 0){
-//                    $dueDate = $row["DueDate"];
-//                 }
-
-//                 $arr=array(
-//                     "id" =>  $row["Id"],
-//                     "nokontrol" => $row["NoKontrol"],
-//                     "bagianmesin" => $row["BagianMesin"],
-//                     "dipasangoleh" => $row["DipasangOleh"],
-//                     "tanggalpemasangan" => $tglPemasangan,
-//                     "deskripsi" => $row["Deskripsi"],
-//                     "noworkrequest" => $row["NoWorkRequest"],
-//                     "picfollowup" => $row["PICFollowUp"],
-//                     "duedate" => $dueDate,
-//                     "status" => $row["Status"],
-//                     "penanggulangan" => $row["Penanggulangan"],
-//                     "createddate" => $row["CreatedDate"],
-//                     "createdby" => $row["CreatedBy"],
-//                     "modifieddate" => $row["ModifiedDate"],
-//                     "modifiedby" => $row["ModifiedBy"],
-//                 );
-//                 array_push($data,$arr);
-//             }
-//             sendResponse(200,$data,'List TPM Red Tag');
-//         } else {
-//             sendResponse(404,[],'Not Found!');
-//         }
-//         $conn->close();
-//     }
-// }
