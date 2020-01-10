@@ -20,6 +20,9 @@ function exportPDF ($string_html, $type, $location){
     // echo FILE_PATH;
 }
 
+function base_url() {
+    return "http://10.48.105.12/B7TPMAPI/apis/";
+}
 
 function SendMail()
 {    

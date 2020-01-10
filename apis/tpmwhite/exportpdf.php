@@ -35,6 +35,7 @@ $conn=getConnection();
                 $html_template = str_replace("{deskripsi}", $row["Deskripsi"], $html_template);
                 $html_template = str_replace("{duedate}", $row["DueDate"], $html_template);
                 $html_template = str_replace("{penanggulangan}", $row["Penanggulangan"], $html_template);
+                $html_template = str_replace("{imageurl}", $row["FileName"] ? base_url() + "/tpmwhite/upload/".$row["FileName"] : null, $html_template);
                 
                 $file_names = exportPDF($html_template, 'tpmwhite', null);
             }
