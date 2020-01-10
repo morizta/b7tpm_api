@@ -46,7 +46,8 @@ if(!$data->id){
                     "createddate" => $row["CreatedDate"],
                     "createdby" => $row["CreatedBy"],
                     "modifieddate" => $row["ModifiedDate"],
-                    "modifiedby" => $row["ModifiedBy"],
+                    "modifiedby" => $row["ModifiedBy"],                    
+                    "fileUrl" => $row["FileName"] ? "/tpmwhite/upload/".$row["FileName"] : null,
                 );
                 array_push($data,$arr);
             }

@@ -29,7 +29,7 @@ if(!$data->code){
                     "code" => $row["Barcode"],
                     "tglmulaioperasi" => $tglMulaiOperasi,
                     "ruang" => $row["Ruang"],
-                    "createddate" => $row["CreatedDate"],
+                    "ceateddate" => $row["CreatedDate"],
                     "createdby" => $row["CreatedBy"],
                 );
                 array_push($data,$arr);

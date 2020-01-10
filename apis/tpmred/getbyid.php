@@ -49,6 +49,7 @@ if(!$data->id){
                     "createdby" => $row["CreatedBy"],
                     "modifieddate" => $row["ModifiedDate"],
                     "modifiedby" => $row["ModifiedBy"],
+                    "fileUrl" => $row["FileName"] ? "/tpmred/upload/".$row["FileName"] : null,
                 );
                 array_push($data,$arr);
             }
