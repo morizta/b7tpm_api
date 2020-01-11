@@ -40,7 +40,7 @@ $conn=getConnection();
                 $html_template = str_replace("{penanggulangan}", $row["Penanggulangan"], $html_template);
                 $html_template = str_replace("{imageurl}", $row["FileName"] ? base_url()."tpmred/upload/".$row["FileName"] : null, $html_template);
                 
-                // var_dump( $row["FileName"] ? base_url()."tpmred/upload/".$row["FileName"] : null ); die();
+                // var_dump( $html_template ); die();
                 $file_names = exportPDF($html_template, 'tpmred', null);
             }
 

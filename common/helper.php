@@ -13,11 +13,12 @@ function exportPDF ($string_html, $type, $location){
     $current_date = date("YmdHms");
     define('FILE_PATH' , $_SERVER['DOCUMENT_ROOT']."/B7TPMAPI/apis/".$type."/generatedfile/");
     $name = $type.'_generated_'.$current_date.'.pdf';
+    // echo $name;
     $mpdf = new \Mpdf\Mpdf();
     $mpdf->WriteHTML($string_html);
     $mpdf->Output(FILE_PATH.$name, 'F');
     return $name;
-    // echo FILE_PATH;
+    // // echo FILE_PATH;
 }
 
 function base_url() {
