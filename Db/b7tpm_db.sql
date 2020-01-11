@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2019 at 03:55 AM
+-- Generation Time: Jan 11, 2020 at 01:10 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -55,12 +55,19 @@ CREATE TABLE `info_mesin` (
   `Id` bigint(20) NOT NULL,
   `NoAsset` varchar(150) NOT NULL,
   `NoMesin` varchar(150) NOT NULL,
-  `Barcode` text NOT NULL,
+  `Barcode` varchar(500) NOT NULL,
   `TglMulaiOperasi` datetime NOT NULL,
   `Ruang` varchar(150) NOT NULL,
   `CreatedDate` datetime NOT NULL,
   `CreatedBy` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `info_mesin`
+--
+
+INSERT INTO `info_mesin` (`Id`, `NoAsset`, `NoMesin`, `Barcode`, `TglMulaiOperasi`, `Ruang`, `CreatedDate`, `CreatedBy`) VALUES
+(1, '123456', '12412516', '8992775709085', '2019-12-12 00:00:00', '125256', '2019-12-11 00:00:00', 'system');
 
 -- --------------------------------------------------------
 
@@ -80,6 +87,7 @@ CREATE TABLE `tpm_redtag` (
   `DueDate` datetime DEFAULT NULL,
   `Status` varchar(25) DEFAULT NULL,
   `Penanggulangan` text DEFAULT NULL,
+  `FileName` varchar(500) NOT NULL,
   `CreatedDate` datetime DEFAULT NULL,
   `CreatedBy` varchar(150) DEFAULT NULL,
   `ModifiedDate` datetime DEFAULT NULL,
@@ -90,14 +98,9 @@ CREATE TABLE `tpm_redtag` (
 -- Dumping data for table `tpm_redtag`
 --
 
-INSERT INTO `tpm_redtag` (`Id`, `NoKontrol`, `BagianMesin`, `DipasangOleh`, `TanggalPemasangan`, `Deskripsi`, `NoWorkRequest`, `PICFollowUp`, `DueDate`, `Status`, `Penanggulangan`, `CreatedDate`, `CreatedBy`, `ModifiedDate`, `ModifiedBy`) VALUES
-(1, 'No1234', 'bag mesin 1', 'Riska', '2019-12-09 00:00:00', 'Tes Deskripsi', 'no01234', 'Riska', '2019-12-09 00:00:00', 'Close', 'Ini Penanggulangan', '2019-12-09 00:00:00', 'Tes', '0000-00-00 00:00:00', ''),
-(2, 'tesNo Kontrol', '12345', 'riska', '0000-00-00 00:00:00', 'deskripsi', 'No Work Request', 'PIC Follow', '0000-00-00 00:00:00', 'Open', 'Penanggulangan', '2019-12-09 05:12:00', 'Created', NULL, NULL),
-(3, 'tesNo Kontrol', '12345', 'riska', '0000-00-00 00:00:00', 'deskripsi', NULL, NULL, '0000-00-00 00:00:00', 'Open', 'Penanggulangan', '2019-12-09 05:12:00', 'Created', NULL, NULL),
-(4, 'tesNo Kontrol', '12345', 'riska', '0000-00-00 00:00:00', 'deskripsi', NULL, NULL, '0000-00-00 00:00:00', 'Open', 'Penanggulangan', '2019-12-09 05:12:00', 'Created', NULL, NULL),
-(5, 'tesNo Kontrol', '12345', 'riska', '0000-00-00 00:00:00', 'deskripsi', NULL, NULL, '0000-00-00 00:00:00', 'Open', 'Penanggulangan', '2019-12-09 05:12:00', 'Created', NULL, NULL),
-(6, 'tesNo Kontrol', '12345', 'riska', '0000-00-00 00:00:00', 'deskripsi', NULL, NULL, '0000-00-00 00:00:00', 'Open', 'Penanggulangan', '2019-12-09 05:12:00', 'Created', NULL, NULL),
-(7, 'tesNo Kontrol', '12345', 'riska', '0000-00-00 00:00:00', 'deskripsi', NULL, NULL, '0000-00-00 00:00:00', 'Open', 'Penanggulangan', '2019-12-09 05:12:00', 'Created', NULL, NULL);
+INSERT INTO `tpm_redtag` (`Id`, `NoKontrol`, `BagianMesin`, `DipasangOleh`, `TanggalPemasangan`, `Deskripsi`, `NoWorkRequest`, `PICFollowUp`, `DueDate`, `Status`, `Penanggulangan`, `FileName`, `CreatedDate`, `CreatedBy`, `ModifiedDate`, `ModifiedBy`) VALUES
+(9, '123123', '123123', '123213', '2020-01-09 00:00:00', '123123', '124', '124124', '2020-01-09 00:00:00', 'Open', '123123', '', '2020-01-09 08:01:00', '', NULL, NULL),
+(10, '123123123', '123123', '123123', '2020-01-09 00:00:00', '123123', '123123', '123123', '2020-01-09 00:00:00', 'Open', '12313', 'download.jpg', '2020-01-09 08:01:00', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -127,7 +130,8 @@ CREATE TABLE `tpm_whitetag` (
 
 INSERT INTO `tpm_whitetag` (`Id`, `NoKontrol`, `BagianMesin`, `DipasangOleh`, `TanggalPemasangan`, `Deskripsi`, `DueDate`, `Status`, `Penanggulangan`, `CreatedDate`, `CreatedBy`, `ModifiedDate`, `ModifiedBy`) VALUES
 (1, 'tesNo Kontrol', '12345', 'riska', '0000-00-00 00:00:00', 'deskripsi', '0000-00-00 00:00:00', 'Close', 'Penanggulangan', '2019-12-09 05:12:00', 'Created', NULL, NULL),
-(2, 'NoWork1234', 'mesin1234', '', '2019-12-16 00:00:00', 'Deskripsi', '2019-12-16 00:00:00', 'Open', '12345', '2019-12-15 06:12:00', '', NULL, NULL);
+(2, 'NoWork1234', 'mesin1234', '', '2019-12-16 00:00:00', 'Deskripsi', '2019-12-16 00:00:00', 'Open', '12345', '2019-12-15 06:12:00', '', NULL, NULL),
+(3, '123123', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 'Open', '', '2020-01-09 08:01:00', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -156,8 +160,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`Id`, `UserName`, `Password`, `FullName`, `Email`, `NIK`, `GroupId`, `IsActive`, `CreatedDate`, `CreatedBy`, `ModifiedDate`, `ModifiedBy`) VALUES
 (1, 'motaufiq', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Admin Full', 'mrizky.taufiqh@gmail.com', '', 1, 1, '2019-11-26 00:00:00', 'System', '0000-00-00 00:00:00', ''),
-(2, 'tes', 'tes', '', 'tes@gmail.com', '124124', 3, 1, '2019-12-09 00:00:00', 'System', NULL, NULL),
-(3, '', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', '', '123451', 3, 1, '0000-00-00 00:00:00', 'system', NULL, NULL),
+(2, 'spv', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'USER SPV', 'tes@gmail.com', '124124', 2, 1, '2019-12-09 00:00:00', 'System', NULL, NULL),
+(3, 'user', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'User Biasa ', 'UserBiasa@gmail.com', '123451', 3, 1, '2019-12-22 00:00:00', 'system', NULL, NULL),
 (4, 'rzonyx', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', '', '123451', 3, 1, '0000-00-00 00:00:00', 'system', NULL, NULL),
 (5, 'rzonyxx', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', '', '123451', 3, 1, '0000-00-00 00:00:00', 'system', NULL, NULL),
 (6, 'rzony2xx', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', '', '123451', 3, 1, '2019-12-08 06:12:00', 'system', NULL, NULL),
@@ -212,19 +216,19 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `info_mesin`
 --
 ALTER TABLE `info_mesin`
-  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tpm_redtag`
 --
 ALTER TABLE `tpm_redtag`
-  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tpm_whitetag`
 --
 ALTER TABLE `tpm_whitetag`
-  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
